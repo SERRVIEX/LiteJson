@@ -12,6 +12,7 @@
 ## Description
 
 This is a tiny version of SimpleJSON by Bunny83 with some modifications.
+
 [![Author](https://img.shields.io/badge/SimpleJSON-gray.svg?logo=Github)](https://github.com/Bunny83/SimpleJSON)
 
 Which news?
