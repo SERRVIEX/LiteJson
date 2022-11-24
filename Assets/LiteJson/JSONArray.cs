@@ -6,7 +6,7 @@ namespace LiteJson
 
     public sealed class JSONArray : JSONNode
     {
-        public override JSONType Type => JSONType.Array;
+        public override JSONNodeType Type => JSONNodeType.Array;
 
         private List<JSONNode> _objects = new List<JSONNode>();
         public override int Count => _objects.Count;

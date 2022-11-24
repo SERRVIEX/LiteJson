@@ -4,7 +4,7 @@ namespace LiteJson
 
     public sealed class JSONBool : JSONNode
     {
-        public override JSONType Type => JSONType.Boolean;
+        public override JSONNodeType Type => JSONNodeType.Boolean;
         private bool _value;
 
         // Constructors

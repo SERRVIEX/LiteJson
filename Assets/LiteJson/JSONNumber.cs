@@ -4,7 +4,7 @@ namespace LiteJson
 
     public sealed class JSONNumber : JSONNode
     {
-        public override JSONType Type => JSONType.Number;
+        public override JSONNodeType Type => JSONNodeType.Number;
         private double _value;
 
         // Constructors

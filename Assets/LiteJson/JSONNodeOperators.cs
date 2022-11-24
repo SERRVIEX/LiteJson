@@ -19,6 +19,9 @@ namespace LiteJson
         public static implicit operator JSONNode(double value) => new JSONNumber(value);
         public static implicit operator double(JSONNode value) => value == null ? 0 : value.AsDouble();
 
+        public static implicit operator JSONNode(long value) => new JSONString(value.ToString());
+        public static implicit operator long(JSONNode value) => value == null ? 0 : value.AsLong();
+
         public static implicit operator JSONNode(Vector2 value)
         {
             JSONArray node = new JSONArray();

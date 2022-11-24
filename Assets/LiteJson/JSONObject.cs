@@ -6,7 +6,7 @@ namespace LiteJson
 
     public sealed class JSONObject : JSONNode
     {
-        public override JSONType Type => JSONType.Object;
+        public override JSONNodeType Type => JSONNodeType.Object;
 
         private Dictionary<string, JSONNode> _objects = new Dictionary<string, JSONNode>();
         public override int Count => _objects.Count;

@@ -8,7 +8,7 @@ namespace LiteJson
     {
         public static bool AllowLineComments;
 
-        public virtual JSONType Type { get; }
+        public virtual JSONNodeType Type { get; }
 
         public JSONNode Parent { get; protected set; }
         public virtual int Count => 0;
@@ -20,7 +20,7 @@ namespace LiteJson
                 if (Parent == null)
                     return "root";
 
-                if (Parent.Type == JSONType.Array)
+                if (Parent.Type == JSONNodeType.Array)
                     return Parent.AsArray().IndexOf(this).ToString();
 
                 return _key;
@@ -133,10 +133,10 @@ namespace LiteJson
                     var item = nodes[i];
                     if (item.value.Parent != null)
                     {
-                        if (item.value.Parent.Type == JSONType.Object)
+                        if (item.value.Parent.Type == JSONNodeType.Object)
                             builder.Append($"[\"{item.key}\"]");
 
-                        else if (item.value.Parent.Type == JSONType.Array)
+                        else if (item.value.Parent.Type == JSONNodeType.Array)
                             builder.Append($"[{item.key}]");
                     }
                 }

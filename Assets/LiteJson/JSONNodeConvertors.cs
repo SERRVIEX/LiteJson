@@ -53,5 +53,13 @@ namespace LiteJson
 
             return result;
         }
+
+        public virtual long AsLong()
+        {
+            if (!long.TryParse(Value, out long result))
+                Debug.LogError($"Value '{Value}' of key '{Key}' could not be parsed as long.");
+
+            return result;
+        }
     }
 }

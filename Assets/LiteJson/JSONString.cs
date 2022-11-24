@@ -4,7 +4,7 @@ namespace LiteJson
 
     public sealed class JSONString : JSONNode
     {
-        public override JSONType Type => JSONType.String;
+        public override JSONNodeType Type => JSONNodeType.String;
 
         // Constructors
 

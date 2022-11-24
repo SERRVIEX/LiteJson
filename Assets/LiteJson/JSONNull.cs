@@ -4,7 +4,7 @@ namespace LiteJson
 
     public sealed class JSONNull : JSONNode
     {
-        public override JSONType Type => JSONType.Null;
+        public override JSONNodeType Type => JSONNodeType.Null;
 
         // Methods
 
