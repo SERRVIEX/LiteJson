@@ -11,7 +11,7 @@ namespace LiteJson
 
         public JSONBool(bool value)
         {
-            Value = value.ToString();
+            Value = value.ToString().ToLower();
             _value = value;
         }
 

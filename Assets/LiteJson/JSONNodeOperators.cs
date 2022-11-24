@@ -1,11 +1,13 @@
 namespace LiteJson
 {
+    using System.Collections.Generic;
+
     using UnityEngine;
 
     public abstract partial class JSONNode
     {
-        public static implicit operator JSONNode(string value) => value == null ? null : new JSONString(value);
-        public static implicit operator string(JSONNode value) => value == null ? null : value.Value;
+        public static implicit operator JSONNode(string value) => value == null ? new JSONNull() : new JSONString(value);
+        public static implicit operator string(JSONNode value) => value == null ? new JSONNull() : value.Value;
 
         public static implicit operator JSONNode(bool value) => new JSONBool(value);
         public static implicit operator bool(JSONNode value) => value == null ? false : value.AsBool();
@@ -14,13 +16,15 @@ namespace LiteJson
         public static implicit operator int(JSONNode value) => value == null ? 0 : value.AsInt();
 
         public static implicit operator JSONNode(float value) => new JSONNumber(value);
-        public static implicit operator float(JSONNode value) => value == null ? 0 : value.AsFloat();
+        public static implicit operator float(JSONNode value) => value == null ? 0f : value.AsFloat();
 
         public static implicit operator JSONNode(double value) => new JSONNumber(value);
         public static implicit operator double(JSONNode value) => value == null ? 0 : value.AsDouble();
 
-        public static implicit operator JSONNode(long value) => new JSONString(value.ToString());
-        public static implicit operator long(JSONNode value) => value == null ? 0 : value.AsLong();
+        public static implicit operator JSONNode(long value) => new JSONNumber(value);
+        public static implicit operator long(JSONNode value) => value == null ? 0L : value.AsLong();
+
+        public static implicit operator JSONNode(KeyValuePair<string, JSONNode> keyValue) => keyValue.Value;
 
         public static implicit operator JSONNode(Vector2 value)
         {
