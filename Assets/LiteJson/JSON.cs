@@ -33,6 +33,7 @@ namespace LiteJson
 
         public static JSONNode Parse(string value)
         {
+            CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
             Stack<JSONNode> stack = new Stack<JSONNode>();
             JSONNode context = null;
 
@@ -187,9 +188,7 @@ namespace LiteJson
                                 case 'u':
                                     {
                                         string s = value.Substring(i + 1, 4);
-                                        token.Append((char)int.Parse(
-                                            s,
-                                            System.Globalization.NumberStyles.AllowHexSpecifier));
+                                        token.Append((char)int.Parse(s, NumberStyles.AllowHexSpecifier));
                                         i += 4;
                                         break;
                                     }
@@ -245,6 +244,8 @@ namespace LiteJson
                 return value;
             else
                 return token;
+
+           
         }
 
         internal static string Escape(string text)

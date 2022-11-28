@@ -1,6 +1,7 @@
 namespace LiteJson
 {
     using System.Text;
+    using System.Globalization;
 
     public sealed class JSONNumber : JSONNode
     {
@@ -11,7 +12,7 @@ namespace LiteJson
 
         public JSONNumber(double value)
         {
-            Value = value.ToString();
+            Value = value.ToString(CultureInfo.InvariantCulture);
             _value = value;
         }
 
