@@ -33,7 +33,6 @@ namespace LiteJson
 
         public static JSONNode Parse(string value)
         {
-            CultureInfo.CurrentCulture = new CultureInfo("ru-RU");
             Stack<JSONNode> stack = new Stack<JSONNode>();
             JSONNode context = null;
 
