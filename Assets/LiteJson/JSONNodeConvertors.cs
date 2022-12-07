@@ -1,5 +1,7 @@
 namespace LiteJson
 {
+    using System.Globalization;
+
     using UnityEngine;
 
     public abstract partial class JSONNode
@@ -32,7 +34,7 @@ namespace LiteJson
 
         public virtual int AsInt()
         {
-            if (!int.TryParse(Value, out int result))
+            if (!int.TryParse(Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int result))
                 Debug.LogError($"Value '{Value}' of key '{Key}' could not be parsed as int.");
 
             return result;
@@ -40,7 +42,7 @@ namespace LiteJson
 
         public virtual float AsFloat()
         {
-            if (!float.TryParse(Value, out float result))
+            if (!float.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float result))
                 Debug.LogError($"Value '{Value}' of key '{Key}' could not be parsed as float.");
 
             return result;
@@ -48,7 +50,7 @@ namespace LiteJson
 
         public virtual double AsDouble()
         {
-            if (!double.TryParse(Value, out double result))
+            if (!double.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double result))
                 Debug.LogError($"Value '{Value}' of key '{Key}' could not be parsed as double.");
 
             return result;
@@ -56,7 +58,7 @@ namespace LiteJson
 
         public virtual long AsLong()
         {
-            if (!long.TryParse(Value, out long result))
+            if (!long.TryParse(Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out long result))
                 Debug.LogError($"Value '{Value}' of key '{Key}' could not be parsed as long.");
 
             return result;

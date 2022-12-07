@@ -3,6 +3,7 @@ namespace LiteJson
     using System;
     using System.Text;
     using System.Collections.Generic;
+    using System.Linq;
 
     public sealed class JSONObject : JSONNode
     {
@@ -41,6 +42,35 @@ namespace LiteJson
                 }
                 else
                     _objects.Add(key, value);
+            }
+        }
+
+        public override JSONNode this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= _objects.Count)
+                    return null;
+                return _objects.ElementAt(index).Value;
+            }
+            set
+            {
+                if (value == null)
+                    value = new JSONNull();
+
+                SetKey(value, index.ToString());
+                SetParent(value, this);
+
+                if (_objects.ContainsKey(index.ToString()))
+                {
+                    JSONNode node = _objects[index.ToString()];
+                    RemoveKey(node);
+                    RemoveParent(node);
+
+                    _objects[index.ToString()] = value;
+                }
+                else
+                    _objects.Add(index.ToString(), value);
             }
         }
 
