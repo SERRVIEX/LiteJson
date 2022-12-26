@@ -66,6 +66,13 @@ namespace LiteJson
         // Methods
 
         /// <summary>
+        /// Lazy creator intendede for object type.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="value"></param>
+        public virtual void Create(string path, JSONNode value) => throw new Exception($"That function isn't implemented for '{Type}' type.");
+
+        /// <summary>
         /// Intended for object type.
         /// </summary>
         public virtual bool Contains(string key) => throw new Exception($"That function isn't implemented for '{Type}' type.");

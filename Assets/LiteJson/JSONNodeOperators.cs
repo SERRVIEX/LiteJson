@@ -100,6 +100,26 @@ namespace LiteJson
             return vector;
         }
 
+        public static implicit operator JSONNode(Quaternion value)
+        {
+            JSONArray node = new JSONArray();
+            node.Add(value.x);
+            node.Add(value.y);
+            node.Add(value.z);
+            node.Add(value.w);
+            return node;
+        }
+
+        public static implicit operator Quaternion(JSONNode value)
+        {
+            Quaternion quaternion = new Quaternion();
+            quaternion.x = value[0];
+            quaternion.y = value[1];
+            quaternion.z = value[2];
+            quaternion.w = value[3];
+            return quaternion;
+        }
+
         public static implicit operator JSONNode(Color value)
         {
             JSONArray node = new JSONArray();

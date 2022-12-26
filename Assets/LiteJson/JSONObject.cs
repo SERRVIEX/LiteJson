@@ -58,25 +58,80 @@ namespace LiteJson
                 if (value == null)
                     value = new JSONNull();
 
-                SetKey(value, index.ToString());
-                SetParent(value, this);
-
-                if (_objects.ContainsKey(index.ToString()))
+                if (index < 0 || index >= Count)
                 {
-                    JSONNode node = _objects[index.ToString()];
-                    RemoveKey(node);
-                    RemoveParent(node);
+                    string key = index.ToString();
+                    SetKey(value, key);
 
-                    _objects[index.ToString()] = value;
+                    if (_objects.ContainsKey(key))
+                    {
+                        JSONNode node = _objects[key];
+                        RemoveKey(node);
+                        RemoveParent(node);
+
+                        _objects[key] = value;
+                    }
+                    else
+                        _objects.Add(key, value);
                 }
                 else
-                    _objects.Add(index.ToString(), value);
+                {
+                    string key = _objects.ElementAt(index).Key;
+                    _objects[key] = value;
+                }
+
+                SetParent(value, this);
             }
         }
 
         // Methods
 
-        public override bool Contains(string key) => _objects.ContainsKey(key);
+        public override void Create(string path, JSONNode value)
+        {
+            if (!path.Contains('/'))
+            {
+                this[path] = value;
+                return;
+            }
+
+            string[] names = path.Split('/');
+            JSONNode node = this;
+            for (int i = 0; i < names.Length - 1; i++)
+            {
+                if (node.Contains(names[i]))
+                    node = node[names[i]];
+                else
+                {
+                    JSONNode child = new JSONObject();
+                    (node as JSONObject)._objects.Add(names[i], child);
+                    node = child;
+                }
+            }
+
+            string lastName = names[names.Length - 1];
+            node[lastName] = value;
+        }
+
+        public override bool Contains(string key)
+        {
+            if(!key.Contains('/'))
+                return _objects.ContainsKey(key);
+
+            string[] names = key.Split('/');
+            JSONNode node = this;
+            for (int i = 0; i < names.Length; i++)
+            {
+                if (node is not JSONObject)
+                    continue;
+
+                if(node.Contains(names[i]))
+                    node = (node as JSONObject)._objects[names[i]];
+                else
+                    return false;
+            }
+
+            return true;
+        }
 
         public override void Add(string key, JSONNode value)
         {
